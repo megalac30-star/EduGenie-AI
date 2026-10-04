@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>EduGenie - AI Learning Assistant</title>
+
+    <style>
+
+        :root {
+            --bg: #08030a;
+            --card: #130815;
+            --card2: #1b0b1d;
+
+            --pink: #ff1493;
+            --hotpink: #ff0080;
+            --lightpink: #ff69b4;
+            --purple: #b026ff;
+
+            --text: #fff2fa;
+            --muted: #b88fa8;
+
+            --border: rgba(255, 20, 147, 0.28);
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            color: var(--text);
+
+            font-family:
+                Inter,
+                Arial,
+                sans-serif;
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 0%,
+                    rgba(255, 20, 147, 0.22),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(176, 38, 255, 0.20),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(255, 0, 128, 0.12),
+                    transparent 35%
+                ),
+
+                var(--bg);
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .topbar {
+            height: 75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5vw;
+
+            border-bottom:
+                1px solid var(--border);
+
+            background:
+                rgba(8, 2, 12, 0.82);
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 0 30px
+                rgba(255, 20, 147, 0.08);
+        }
+
+
+        .brand {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            color: white;
+
+            text-decoration: none;
+        }
+
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 12px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--pink),
+                    var(--hotpink),
+                    var(--purple)
+                );
+
+            font-size: 20px;
+            font-weight: 900;
+
+            box-shadow:
+                0 0 10px var(--pink),
+                0 0 25px rgba(255, 20, 147, 0.65),
+                0 0 50px rgba(255, 20, 147, 0.3);
+        }
+
+
+        .brand strong {
+            display: block;
+
+            font-size: 17px;
+
+            text-shadow:
+                0 0 12px
+                rgba(255, 20, 147, 0.7);
+        }
+
+
+        .brand small {
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           GEMINI STATUS
+        ========================= */
+
+        .status {
+            padding: 8px 14px;
+
+            border-radius: 20px;
+
+            color: #ff9bd2;
+
+            font-size: 12px;
+
+            border:
+                1px solid
+                rgba(255, 20, 147, 0.3);
+
+            background:
+                rgba(255, 20, 147, 0.07);
+
+            box-shadow:
+                0 0 15px
+                rgba(255, 20, 147, 0.12);
+        }
+
+
+        .status span {
+            display: inline-block;
+
+            width: 7px;
+            height: 7px;
+
+            margin-right: 7px;
+
+            border-radius: 50%;
+
+            background: var(--pink);
+
+            box-shadow:
+                0 0 7px var(--pink),
+                0 0 15px var(--pink);
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: min(1180px, 92vw);
+
+            margin: auto;
+
+            padding: 65px 0;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            margin-bottom: 40px;
+        }
+
+
+        .eyebrow {
+            color: var(--pink);
+
+            font-size: 11px;
+
+            letter-spacing: .18em;
+
+            font-weight: 800;
+
+            margin-bottom: 15px;
+
+            text-shadow:
+                0 0 12px
+                var(--pink);
+        }
+
+
+        .hero h1 {
+            margin: 0;
+
+            font-size:
+                clamp(
+                    42px,
+                    6vw,
+                    72px
+                );
+
+            line-height: 1;
+
+            letter-spacing: -.05em;
+
+            text-shadow:
+                0 0 25px
+                rgba(255, 20, 147, 0.15);
+        }
+
+
+        .hero h1 span {
+            color: transparent;
+
+            -webkit-text-stroke:
+                1px
+                var(--lightpink);
+
+            text-shadow:
+                0 0 15px
+                rgba(255, 20, 147, 0.35);
+        }
+
+
+        .hero p {
+            max-width: 650px;
+
+            color: var(--muted);
+
+            line-height: 1.7;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           APPLICATION
+        ========================= */
+
+        .application {
+            display: grid;
+
+            grid-template-columns:
+                310px 1fr;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            background:
+                rgba(19, 8, 21, 0.9);
+
+            box-shadow:
+
+                0 0 20px
+                rgba(255, 20, 147, 0.08),
+
+                0 0 70px
+                rgba(255, 20, 147, 0.04);
+        }
+
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            padding: 20px;
+
+            border-right:
+                1px solid var(--border);
+
+            background:
+                rgba(255, 20, 147, 0.025);
+        }
+
+
+        .sidebar h3 {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin:
+                5px 8px 15px;
+        }
+
+
+        .task {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 13px 11px;
+
+            margin-bottom: 6px;
+
+            border:
+                1px solid transparent;
+
+            border-radius: 12px;
+
+            color: white;
+
+            background: transparent;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+
+        .task:hover {
+            background:
+                rgba(255, 20, 147, 0.09);
+
+            border-color:
+                rgba(255, 20, 147, 0.25);
+
+            transform:
+                translateX(3px);
+        }
+
+
+        .task.active {
+            border-color:
+                rgba(255, 20, 147, 0.5);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255, 20, 147, 0.16),
+                    rgba(176, 38, 255, 0.08)
+                );
+
+            box-shadow:
+
+                inset 3px 0 0
+                var(--pink),
+
+                0 0 18px
+                rgba(255, 20, 147, 0.10);
+        }
+
+
+        .task > strong {
+            width: 36px;
+            height: 36px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            color: var(--lightpink);
+
+            background:
+                rgba(255, 20, 147, 0.10);
+
+            border:
+                1px solid
+                rgba(255, 20, 147, 0.25);
+
+            box-shadow:
+                0 0 10px
+                rgba(255, 20, 147, 0.15);
+        }
+
+
+        .task b {
+            display: block;
+
+            font-size: 13px;
+        }
+
+
+        .task small {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+            padding: 32px;
+        }
+
+
+        .content-header {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            margin-bottom: 25px;
+        }
+
+
+        .mode-label {
+            color: var(--pink);
+
+            font-size: 10px;
+
+            letter-spacing: .15em;
+
+            font-weight: 800;
+
+            text-shadow:
+                0 0 10px
+                rgba(255, 20, 147, .8);
+        }
+
+
+        .content h2 {
+            margin:
+                7px 0 0;
+
+            font-size: 26px;
+        }
+
+
+        /* =========================
+           CLEAR / COPY
+        ========================= */
+
+        .clear-button,
+        .copy {
+            border:
+                1px solid
+                rgba(255, 20, 147, 0.3);
+
+            border-radius: 8px;
+
+            padding:
+                8px 12px;
+
+            color: #d9a4c1;
+
+            background:
+                rgba(255, 20, 147, 0.04);
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+
+        .clear-button:hover,
+        .copy:hover {
+            color: white;
+
+            border-color:
+                var(--pink);
+
+            background:
+                rgba(255, 20, 147, 0.12);
+
+            box-shadow:
+                0 0 15px
+                rgba(255, 20, 147, .25);
+        }
+
+
+        /* =========================
+           INPUT
+        ========================= */
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #ffd7ec;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        textarea {
+            width: 100%;
+
+            min-height: 175px;
+
+            padding: 17px;
+
+            resize: vertical;
+
+            border:
+                1px solid
+                rgba(255, 20, 147, 0.25);
+
+            border-radius: 14px;
+
+            outline: none;
+
+            color: white;
+
+            background:
+                rgba(5, 1, 8, .75);
+
+            line-height: 1.6;
+
+            transition: .2s ease;
+        }
+
+
+        textarea::placeholder {
+            color: #765267;
+        }
+
+
+        textarea:focus {
+            border-color:
+                var(--pink);
+
+            box-shadow:
+
+                0 0 0 3px
+                rgba(255, 20, 147, .08),
+
+                0 0 25px
+                rgba(255, 20, 147, .15);
+        }
+
+
+        /* =========================
+           CHARACTER COUNT
+        ========================= */
+
+        .input-info {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            margin:
+                8px 2px 15px;
+
+            color: #765368;
+
+            font-size: 10px;
+        }
+
+
+        /* =========================
+           RUN BUTTON
+        ========================= */
+
+        .run-button {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            color: white;
+
+            background:
+
+                linear-gradient(
+                    100deg,
+                    var(--pink),
+                    var(--hotpink),
+                    var(--purple)
+                );
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+
+                0 0 10px
+                rgba(255, 20, 147, .6),
+
+                0 0 25px
+                rgba(255, 20, 147, .35);
+
+            transition: .2s ease;
+        }
+
+
+        .run-button:hover {
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+
+                0 0 15px
+                rgba(255, 20, 147, .9),
+
+                0 0 35px
+                rgba(255, 20, 147, .5),
+
+                0 0 65px
+                rgba(176, 38, 255, .25);
+        }
+
+
+        .run-button:active {
+            transform:
+                translateY(0);
+        }
+
+
+        .run-button:disabled {
+            opacity: .6;
+
+            cursor: wait;
+        }
+
+
+        /* =========================
+           SPINNER
+        ========================= */
+
+        .spinner {
+            display: inline-block;
+
+            width: 15px;
+            height: 15px;
+
+            border:
+                2px solid
+                rgba(255,255,255,.3);
+
+            border-top-color:
+                white;
+
+            border-radius: 50%;
+
+            animation:
+                spin .7s linear infinite;
+        }
+
+
+        @keyframes spin {
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+
+        }
+
+
+        .hidden {
+            display: none !important;
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error {
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border:
+                1px solid
+                rgba(255, 20, 147, .35);
+
+            border-radius: 10px;
+
+            color: #ffb6d9;
+
+            background:
+                rgba(255, 20, 147, .08);
+
+            box-shadow:
+                0 0 15px
+                rgba(255, 20, 147, .08);
+        }
+
+
+        /* =========================
+           RESULT
+        ========================= */
+
+        .result-section {
+            margin-top: 28px;
+        }
+
+
+        .result-header {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            margin-bottom: 10px;
+
+            color: #956b82;
+
+            font-size: 10px;
+
+            letter-spacing: .14em;
+        }
+
+
+        .result {
+            min-height: 150px;
+
+            padding: 20px;
+
+            border:
+                1px solid
+                rgba(255, 20, 147, .22);
+
+            border-radius: 14px;
+
+            background:
+                rgba(5, 1, 8, .65);
+
+            line-height: 1.65;
+
+            box-shadow:
+                inset 0 0 25px
+                rgba(255, 20, 147, .025);
+        }
+
+
+        .result.empty {
+            display: grid;
+
+            place-items: center;
+
+            text-align: center;
+
+            color: #79566b;
+        }
+
+
+        .result.empty div {
+            color: var(--pink);
+
+            font-size: 30px;
+
+            text-shadow:
+
+                0 0 10px
+                var(--pink),
+
+                0 0 25px
+                rgba(255, 20, 147, .7);
+        }
+
+
+        .result h3 {
+            color: var(--lightpink);
+
+            text-shadow:
+                0 0 8px
+                rgba(255, 20, 147, .5);
+        }
+
+
+        .result li {
+            margin: 7px 0;
+        }
+
+
+        /* =========================
+           QUIZ OPTIONS
+        ========================= */
+
+        .quiz-question {
+            margin-bottom: 25px;
+
+            padding: 18px;
+
+            border:
+                1px solid
+                rgba(255, 20, 147, .18);
+
+            border-radius: 12px;
+
+            background:
+                rgba(255, 20, 147, .025);
+        }
+
+
+        .option {
+            width: 100%;
+
+            margin-top: 8px;
+
+            padding: 11px 14px;
+
+            border:
+                1px solid
+                rgba(255, 20, 147, .20);
+
+            border-radius: 9px;
+
+            color: #ffe7f3;
+
+            background:
+                rgba(255, 20, 147, .035);
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+
+        .option:hover {
+            border-color:
+                var(--pink);
+
+            background:
+                rgba(255, 20, 147, .10);
+
+            box-shadow:
+                0 0 15px
+                rgba(255, 20, 147, .12);
+        }
+
+
+        .option:disabled {
+            cursor: default;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 25px;
+
+            text-align: center;
+
+            color: #704f63;
+
+            font-size: 11px;
+
+            border-top:
+                1px solid
+                rgba(255, 20, 147, .12);
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width: 850px) {
+
+            .application {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .sidebar {
+                border-right: 0;
+
+                border-bottom:
+                    1px solid
+                    rgba(255, 20, 147, .20);
+            }
+
+        }
+
+
+        @media(max-width: 550px) {
+
+            .content {
+                padding: 20px;
+            }
+
+            .status {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="topbar">
+
+        <a
+            href="/"
+            class="brand"
+        >
+
+            <div class="brand-logo">
+                E
+            </div>
+
+            <div>
+
+                <strong>
+                    EduGenie
+                </strong>
+
+                <small>
+                    AI Learning Assistant
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <div class="status">
+
+            <span></span>
+
+            Gemini Connected
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="eyebrow">
+                GOOGLE GEMINI POWERED LEARNING
+            </div>
+
+
+            <h1>
+
+                Learn anything.
+
+                <br>
+
+                <span>
+                    Understand everything.
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Ask questions, simplify difficult
+                concepts, generate quizzes,
+                summarize notes and create
+                personalized learning paths.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- =========================
+             APPLICATION
+        ========================= -->
+
+        <section class="application">
+
+
+            <!-- SIDEBAR -->
+
+            <aside class="sidebar">
+
+                <h3>
+                    Learning Tools
+                </h3>
+
+
+                <button
+                    class="task active"
+                    data-task="qa"
+                >
+
+                    <strong>
+                        ?
+                    </strong>
+
+                    <div>
+
+                        <b>
+                            Ask a Question
+                        </b>
+
+                        <small>
+                            Get a concise answer
+                        </small>
+
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="task"
+                    data-task="explain"
+                >
+
+                    <strong>
+                        ✦
+                    </strong>
+
+                    <div>
+
+                        <b>
+                            Explain a Topic
+                        </b>
+
+                        <small>
+                            Make complex ideas simple
+                        </small>
+
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="task"
+                    data-task="quiz"
+                >
+
+                    <strong>
+                        ✓
+                    </strong>
+
+                    <div>
+
+                        <b>
+                            Generate Quiz
+                        </b>
+
+                        <small>
+                            Create 3 MCQs
+                        </small>
+
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="task"
+                    data-task="summarize"
+                >
+
+                    <strong>
+                        ≡
+                    </strong>
+
+                    <div>
+
+                        <b>
+                            Summarize
+                        </b>
+
+                        <small>
+                            Quick revision
+                        </small>
+
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="task"
+                    data-task="learn"
+                >
+
+                    <strong>
+                        ↗
+                    </strong>
+
+                    <div>
+
+                        <b>
+                            Learning Path
+                        </b>
+
+                        <small>
+                            Beginner to advanced
+                        </small>
+
+                    </div>
+
+                </button>
+
+            </aside>
+
+
+
+            <!-- CONTENT -->
+
+            <section class="content">
+
+
+                <div class="content-header">
+
+                    <div>
+
+                        <span
+                            id="modeLabel"
+                            class="mode-label"
+                        >
+                            ASK A QUESTION
+                        </span>
+
+
+                        <h2 id="modeTitle">
+                            What would you like to learn?
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        id="clearBtn"
+                        class="clear-button"
+                    >
+                        Clear
+                    </button>
+
+                </div>
+
+
+
+                <label
+                    id="inputLabel"
+                    for="userInput"
+                >
+                    Your Question
+                </label>
+
+
+                <textarea
+                    id="userInput"
+                    placeholder="Example: Which is the largest ocean?"
+                ></textarea>
+
+
+                <div class="input-info">
+
+                    <span id="charCount">
+                        0 characters
+                    </span>
+
+                    <span>
+                        Ctrl + Enter to run
+                    </span>
+
+                </div>
+
+
+
+                <button
+                    id="runBtn"
+                    class="run-button"
+                >
+
+                    <span id="runText">
+                        Ask EduGenie
+                    </span>
+
+                    <span
+                        id="spinner"
+                        class="spinner hidden"
+                    ></span>
+
+                </button>
+
+
+
+                <div
+                    id="errorBox"
+                    class="error hidden"
+                ></div>
+
+
+
+                <!-- RESULT -->
+
+                <div class="result-section">
+
+                    <div class="result-header">
+
+                        <span>
+                            EDUGENIE RESPONSE
+                        </span>
+
+
+                        <button
+                            id="copyBtn"
+                            class="copy hidden"
+                        >
+                            Copy
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="result"
+                        class="result empty"
+                    >
+
+                        <div>
+                            ✦
+                        </div>
+
+                        <p>
+                            Your result will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+
+    <footer>
+
+        EduGenie • FastAPI + Google Gemini
+
+    </footer>
+
+
+    <!-- Keep your existing JavaScript -->
+
+    <script src="./app.js"></script>
+
+
+</body>
+
+</html>
