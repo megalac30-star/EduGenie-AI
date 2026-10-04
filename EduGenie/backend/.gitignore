@@ -1,17 +1,6 @@
-# Python virtual environment
+ramya/
 megala/
-
-# Python cache
 __pycache__/
 *.pyc
-
-# Environment variables / API keys
 .env
 *.env
-
-# Frontend dependencies
-node_modules/
-
-# Build files
-dist/
-build/
